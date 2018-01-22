@@ -1,0 +1,5 @@
+---
+chrony_ntp_pools:
+  - arch.pool.ntp.org iburst maxpoll 10
+chrony_config_driftfile: /var/lib/chrony/drift
+...

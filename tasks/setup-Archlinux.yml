@@ -1,0 +1,6 @@
+---
+- pacman:
+    name: chrony
+    state: installed
+    update_cache: yes
+...

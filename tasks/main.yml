@@ -1,0 +1,44 @@
+---
+- name: Include OS specific configuration
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution  }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - "{{ ansible_os_family }}.yml"
+
+- name: Set up timezone
+  file:
+    path: /etc/localtime
+    src: "/usr/share/zoneinfo/{{ chrony_timezone }}"
+    state: link
+    owner: root
+    group: root
+
+- name: Install
+  include_tasks: "setup-{{ ansible_os_family }}.yml"
+
+- name: Set up
+  template:
+    src: templates/chrony.conf.j2
+    dest: "{{ chrony_config_file }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart chrony
+
+- name: Disable conflicting services
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: no
+  register: disable_service_result
+  failed_when: disable_service_result | failed and ('Could not find the requested service' not in disable_service_result.msg)
+  with_items:
+    - ntpd
+    - systemd-timesyncd
+
+- name: Enable service
+  service:
+    name: "{{ chrony_service_name }}"
+    enabled: yes
+...

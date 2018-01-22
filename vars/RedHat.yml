@@ -1,0 +1,4 @@
+---
+chrony_ntp_pools:
+  - rhel.pool.ntp.org iburst maxpoll 10
+...

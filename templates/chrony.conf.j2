@@ -1,0 +1,57 @@
+#jinja2: lstrip_blocks: True
+{{ ansible_managed | comment}}
+# Configuration file for chrony service.
+
+{% if chrony_ntp_servers|length > 0 %}
+# List of NTP servers to use
+{% for server in chrony_ntp_servers %}
+server {{ server }}
+{% endfor %}
+{% endif %}
+
+{%- if chrony_ntp_pools|length > 0 %}
+# List of NTP pools to use
+{% for pool in chrony_ntp_pools %}
+pool {{ pool }}
+{% endfor %}
+{% endif %}
+
+# Drift file
+driftfile {{ chrony_config_driftfile }}
+
+# Step the clock if the adjustement is larger than *threshold* second
+# but only the first *limit* times.
+makestep {{ chrony_makestep_threshold }} {{ chrony_makestep_limit }}
+
+# Keep UTC date and time for RTC
+rtconutc
+
+# Enable RTC synchronization
+rtcsync
+
+{% if chrony_timezone is defined %}
+# Timezone
+leapsectz {{ chrony_timezone }}
+{% endif %}
+
+# Listen for commands only on localhost
+bindcmdaddress 127.0.0.1
+bindcmdaddress ::1
+
+# Log path
+logdir {{ chrony_config_logdir }}
+
+{% if chrony_allow|length > 0 %}
+# Allow NTP requests from these clients:
+# (chrony will then act as a NTP server for these)
+{% for addr in chrony_allow %}
+allow {{ addr }}
+{% endfor %}
+{% endif %}
+
+{% if chrony_deny|length > 0 %}
+# Deny NTP requests from these clients:
+{% for addr in chrony_deny %}
+deny {{ addr }}
+{% endfor %}
+{% endif %}
