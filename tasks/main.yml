@@ -7,12 +7,8 @@
     - "{{ ansible_os_family }}.yml"
 
 - name: Set up timezone
-  file:
-    path: /etc/localtime
-    src: "/usr/share/zoneinfo/{{ chrony_timezone }}"
-    state: link
-    owner: root
-    group: root
+  timezone:
+    name: "{{ chrony_timezone }}"
 
 - name: Install
   include_tasks: "setup-{{ ansible_os_family }}.yml"
