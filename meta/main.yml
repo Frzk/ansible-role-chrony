@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: François KUBLER
-  description: Installs, configures and enables chrony.
+  description: Install, configure and enable chrony.
   company: /kblr
   license: Apache-2.0
   issue_tracker_url: https://github.com/Frzk/ansible-role-chrony/issues 
