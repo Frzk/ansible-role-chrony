@@ -30,7 +30,7 @@ For more information about `chrony`, please check [the official project page](ht
 
 Here is a small example of what your file should look like.
 
-**IMPORTANT**: DO NOT use as it is !
+**IMPORTANT**: DO NOT use like as it is.
 
 ```yaml
 ---
@@ -57,3 +57,4 @@ chrony_deny:
 
 ## Contributing
 
+Code reviews, patches, comments, bug reports and feature requests are welcome. Please read the [Contributing Guide](CONTRIBUTING.md) for further details.
