@@ -37,4 +37,9 @@
   service:
     name: "{{ chrony_service_name }}"
     enabled: yes
+
+- name: Restart service
+  service:
+    name: "{{ chrony_service_name }}"
+    state: restarted
 ...
