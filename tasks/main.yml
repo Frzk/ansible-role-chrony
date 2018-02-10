@@ -37,13 +37,19 @@
     - ntpd
     - systemd-timesyncd
 
-- name: Enable service
+# We have to manually restart the service using `stopped` and `start` to ensure idempotency.
+- name: Stop service
   service:
     name: "{{ chrony_service_name }}"
-    enabled: yes
+    state: stopped
 
 - name: Start service
   service:
     name: "{{ chrony_service_name }}"
     state: started
+
+- name: Enable service
+  service:
+    name: "{{ chrony_service_name }}"
+    enabled: yes
 ...
