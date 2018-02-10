@@ -14,12 +14,18 @@
   timezone:
     name: "{{ chrony_timezone }}"
 
-#- name: Install
-#  include_tasks: "setup-{{ ansible_os_family }}.yml"
 
 # Setup config before installing chrony to keep idempotency.
 # Installing the service will also start it, but we want chrony to run with OUR config.
 # If we install chrony before installing the config file, chrony would have to be restarted and we'd lose idempotency.
+- name: Create configuration directory
+  file:
+    path: "{{ chrony_config_file | dirname }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Set up
   template:
     src: templates/chrony.conf.j2
