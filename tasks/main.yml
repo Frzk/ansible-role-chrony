@@ -14,9 +14,12 @@
   timezone:
     name: "{{ chrony_timezone }}"
 
-- name: Install
-  include_tasks: "setup-{{ ansible_os_family }}.yml"
+#- name: Install
+#  include_tasks: "setup-{{ ansible_os_family }}.yml"
 
+# Setup config before installing chrony to keep idempotency.
+# Installing the service will also start it, but we want chrony to run with OUR config.
+# If we install chrony before installing the config file, chrony would have to be restarted and we'd lose idempotency.
 - name: Set up
   template:
     src: templates/chrony.conf.j2
@@ -25,6 +28,9 @@
     group: root
     mode: 0644
   notify: Restart chrony
+
+- name: Install
+  include_tasks: "setup-{{ ansible_os_family }}.yml"
 
 - name: Disable conflicting services
   service:
@@ -36,12 +42,6 @@
   with_items:
     - ntpd
     - systemd-timesyncd
-
-# We have to manually restart the service using `stopped` and `start` to ensure idempotency.
-- name: Stop service
-  service:
-    name: "{{ chrony_service_name }}"
-    state: stopped
 
 - name: Start service
   service:
