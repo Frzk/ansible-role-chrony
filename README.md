@@ -23,14 +23,16 @@ For more information about `chrony`, please check [the official project page](ht
 | `chrony_allow`              | List of subnets allowed to access this computer as an NTP server.              | `[]`                                   |
 | `chrony_deny`               | List of subnets NOT allowed to access this computer as an NTP server.          | `[]`                                   |
 
-[Documentation](https://chrony.tuxfamily.org/doc/3.2/chrony.conf.html)
+:green_book: Documentation:
+
+- [Chrony configuration documentation](https://chrony.tuxfamily.org/doc/3.2/chrony.conf.html)
 
 
 ## Example
 
 Here is a small example of what your file should look like.
 
-**IMPORTANT**: DO NOT use like as it is.
+**IMPORTANT**: DO NOT use this example as it is.
 
 ```yaml
 ---
