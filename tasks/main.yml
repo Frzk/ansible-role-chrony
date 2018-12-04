@@ -5,7 +5,7 @@
     - paths:
         - "vars"
     - files:
-        - "{{ ansible_distribution  }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
         - "{{ ansible_distribution }}.yml"
         - "{{ ansible_os_family }}.yml"
       skip: yes
@@ -44,7 +44,8 @@
     state: stopped
     enabled: no
   register: disable_service_result
-  failed_when: (disable_service_result is failed) and ('Could not find the requested service' not in disable_service_result.msg)
+  failed_when: (disable_service_result is failed) 
+               and ('Could not find the requested service' not in disable_service_result.msg)
   with_items:
     - ntpd
     - systemd-timesyncd
