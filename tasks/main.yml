@@ -29,7 +29,7 @@
 - name: Set up
   template:
     src: templates/chrony.conf.j2
-    dest: "{{ chrony_config_file }}"
+    dest: "{{ chrony_config_file }}"
     owner: root
     group: root
     mode: 0644
@@ -44,7 +44,7 @@
     state: stopped
     enabled: no
   register: disable_service_result
-  failed_when: (disable_service_result is failed) 
+  failed_when: (disable_service_result is failed)
                and ('Could not find the requested service' not in disable_service_result.msg)
   with_items:
     - ntpd
