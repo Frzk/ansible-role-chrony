@@ -9,7 +9,7 @@ lint:
     config-file: molecule/default/yamllint.yml
 platforms:
   - name: instance
-    image: "frzk/docker-${DISTRIBUTION:-centos7}-ansible:latest"
+    image: "frzk/${MOLECULE_DISTRIB:-centos7}-ansible:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro

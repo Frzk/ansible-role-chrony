@@ -8,10 +8,10 @@ env:
   global:
     - ROLENAME=chrony
   matrix:
-    - DISTRIBUTION=centos7
-    - DISTRIBUTION=debian9
-    - DISTRIBUTION=ubuntu16.04
-    - DISTRIBUTION=ubuntu18.04
+    - MOLECULE_DISTRIB=centos7
+    - MOLECULE_DISTRIB=debian9
+    - MOLECULE_DISTRIB=ubuntu16.04
+    - MOLECULE_DISTRIB=ubuntu18.04
 
 install:
   - pip install molecule docker
