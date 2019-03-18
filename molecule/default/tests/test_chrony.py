@@ -24,7 +24,7 @@ def test_chrony_running_and_enabled(host):
     os = host.system_info.distribution
     service_name = "chronyd"
 
-    if os == "debian":
+    if os in ("debian", "ubuntu"):
         service_name = "chrony"
 
     chrony = host.service(service_name)
