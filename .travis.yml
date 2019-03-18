@@ -22,7 +22,7 @@ before_script:
   - cd frzk.$ROLENAME
 
 script:
-  - molecule test
+  - molecule --debug test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
