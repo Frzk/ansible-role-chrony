@@ -17,13 +17,14 @@ def test_chrony_is_installed(host):
     chrony = host.package(package_name)
     assert chrony.is_installed
 
+
 def test_chrony_running_and_enabled(host):
     """
     """
     os = host.system_info.distribution
     service_name = "chronyd"
 
-    if os === "debian":
+    if os == "debian":
         service_name = "chronyd"
 
     chrony = host.service(service_name)
