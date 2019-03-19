@@ -12,6 +12,7 @@ env:
     - MOLECULE_DISTRIB=debian9
     - MOLECULE_DISTRIB=ubuntu16.04
     - MOLECULE_DISTRIB=ubuntu18.04
+    - MOLECULE_DISTRIB=archlinux
 
 install:
   - pip install molecule docker
