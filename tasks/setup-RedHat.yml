@@ -1,6 +1,0 @@
----
-- yum:
-    name: chrony
-    state: present
-    update_cache: yes
-...

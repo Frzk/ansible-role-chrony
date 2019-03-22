@@ -1,56 +1,29 @@
 ---
-sudo: required
-language: bash
+language: python
 services:
   - docker
 
 # Build matrix
 env:
-  - distribution: centos
-    version: 7
-  - distribution: debian
-    version: 9
-  - distribution: ubuntu
-    version: 16.04
-  - distribution: ubuntu
-    version: 18.04
+  global:
+    - ROLENAME=chrony
+  matrix:
+    - MOLECULE_DISTRIB=centos7
+    - MOLECULE_DISTRIB=debian9
+    - MOLECULE_DISTRIB=ubuntu16.04
+    - MOLECULE_DISTRIB=ubuntu18.04
+    - MOLECULE_DISTRIB=archlinux
 
-before_install:
-  # Pull the image corresponding to the environment vars from Docker Hub:
-  - docker pull "kblr/${distribution}${version}-ansible:latest"
+install:
+  - pip install molecule docker
+
+before_script:
+  - cd ..
+  - mv ansible-role-$ROLENAME frzk.$ROLENAME
+  - cd frzk.$ROLENAME
 
 script:
-  # 0/ Run the container:
-  - > 
-    docker run
-    --name "${TRAVIS_COMMIT}.${distribution}-${version}"
-    --detach
-    --privileged
-    --mount type=bind,source=/sys/fs/cgroup,target=/sys/fs/cgroup,readonly
-    --mount type=bind,source="$(pwd)",target=/etc/ansible/roles/under_test,readonly
-    "kblr/${distribution}${version}-ansible:latest"
-
-  # 1/ Check role syntax:
-  - >
-    docker exec "${TRAVIS_COMMIT}.${distribution}-${version}"
-    ansible-playbook -v /etc/ansible/roles/under_test/tests/test.yml --syntax-check
-
-  # 2/ Check first run:
-  - >
-    docker exec "${TRAVIS_COMMIT}.${distribution}-${version}"
-    ansible-playbook -v /etc/ansible/roles/under_test/tests/test.yml
-
-  # 3/ Check idempotence:
-  - >
-    docker exec "${TRAVIS_COMMIT}.${distribution}-${version}"
-    ansible-playbook -v /etc/ansible/roles/under_test/tests/test.yml
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-
-after_script:
-  # Remove container:
-  - docker rm -f "${TRAVIS_COMMIT}.${distribution}-${version}"
+  - molecule --debug test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

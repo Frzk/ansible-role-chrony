@@ -24,4 +24,6 @@ galaxy_info:
     - system
     - ntp
     - chrony
+    - date
+    - time
 ...
