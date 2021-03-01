@@ -15,6 +15,7 @@ For more information about `chrony`, please check [the official project page](ht
 | `chrony_timezone`           | Path to the configuration file.                                                | `Etc/UTC`                              |
 | `chrony_ntp_pools`          | A list of NTP pools to use, with their options.                                | `[ 'pool.ntp.org iburst maxpoll 10' ]` |
 | `chrony_ntp_servers`        | A list of NTP servers to use, with their options.                              | `[]`                                   |
+| `chrony_ntp_peers`          | A list of NTP peers to use, with their options.                                | `[]`                                   |
 | `chrony_config_file`        | Path to chrony configuration file.                                             | `/etc/chrony.conf`                     |
 | `chrony_config_logdir`      | Path to chrony logs directory.                                                 | `/var/log/chrony`                      |
 | `chrony_config_driftfile`   | Path to chrony drift file.                                                     | `/var/lib/chrony/drift`                |
@@ -44,6 +45,10 @@ chrony_ntp_servers:
   - 1.rhel.pool.ntp.org iburst maxpoll 10
   - 2.rhel.pool.ntp.org iburst maxpoll 10
   - 3.rhel.pool.ntp.org iburst maxpoll 10
+chrony_ntp_peers:
+  - ntp00.example.com iburst maxpoll 10
+  - ntp01.example.com iburst maxpoll 10
+  - ntp02.example.com iburst maxpoll 10
 chrony_config_file: /etc/chrony.conf
 chrony_config_driftfile: /var/lib/chrony/drift
 chrony_makestep_threshold: 5
