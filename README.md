@@ -46,9 +46,9 @@ chrony_ntp_servers:
   - 2.rhel.pool.ntp.org iburst maxpoll 10
   - 3.rhel.pool.ntp.org iburst maxpoll 10
 chrony_ntp_peers:
-  - ntp00.example.com iburst maxpoll 10
-  - ntp01.example.com iburst maxpoll 10
-  - ntp02.example.com iburst maxpoll 10
+  - ntp00.example.com maxpoll 10
+  - ntp01.example.com maxpoll 10
+  - ntp02.example.com maxpoll 10
 chrony_config_file: /etc/chrony.conf
 chrony_config_driftfile: /var/lib/chrony/drift
 chrony_makestep_threshold: 5
