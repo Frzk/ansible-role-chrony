@@ -16,6 +16,13 @@ pool {{ pool }}
 {% endfor %}
 {% endif %}
 
+{% if chrony_ntp_peers|length > 0 %}
+# List of NTP peers to use
+{% for peer in chrony_ntp_peers %}
+peer {{ peer }}
+{% endfor %}
+{% endif %}
+
 # Drift file
 driftfile {{ chrony_config_driftfile }}
 
