@@ -5,7 +5,7 @@ driver:
   name: docker
 lint: |
   set -e
-  yamllint -c molecule/default/yamllint.yml .
+  yamllint .
   ansible-lint
   flake8
 platforms:
