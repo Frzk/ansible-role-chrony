@@ -15,7 +15,7 @@ env:
     - MOLECULE_DISTRIB=archlinux
 
 install:
-  - pip install molecule docker
+  - python -m pip install molecule[docker,lint]
 
 before_script:
   - cd ..
