@@ -3,6 +3,11 @@ dependency:
   name: galaxy
 driver:
   name: docker
+lint: |
+  set -e
+  yamllint -c molecule/default/yamllint.yml .
+  ansible-lint
+  flake8
 lint:
   name: yamllint
   options:
@@ -17,14 +22,10 @@ platforms:
     pre_build_image: true
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
 scenario:
   name: default
 verifier:
   name: testinfra
-  lint:
-    name: flake8
 ...
