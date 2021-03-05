@@ -8,10 +8,6 @@ lint: |
   yamllint -c molecule/default/yamllint.yml .
   ansible-lint
   flake8
-lint:
-  name: yamllint
-  options:
-    config-file: molecule/default/yamllint.yml
 platforms:
   - name: instance
     image: "kblr/${MOLECULE_DISTRIB:-centos7}-ansible:latest"
