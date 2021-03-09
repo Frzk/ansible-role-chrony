@@ -1,0 +1,51 @@
+---
+- name: Prepare
+  hosts: all
+  become: yes
+  tasks:
+    - name: Ansible User
+      block:
+        - name: Create ansible user
+          ansible.builtin.user:
+            name: ansible
+            comment: Ansible User
+            groups:
+              - wheel
+            state: present
+
+        - name: Create sudoers.d dropin
+          ansible.builtin.file:
+            path: "/etc/sudoers.d/"
+            owner: root
+            group: root
+            mode: 0755
+            state: directory
+
+        - name: Allow user ansible to sudo (1)
+          ansible.builtin.lineinfile:
+            path: "/etc/sudoers.d/wheel"
+            line: "%wheel ALL=(ALL) NOPASSWD:ALL"
+            insertbefore: BOF
+            create: yes
+            owner: root
+            group: root
+            mode: 0440
+            state: present
+
+        - name: Allow user ansible to sudo (2)
+          ansible.builtin.lineinfile:
+            path: /etc/sudoers
+            line: "#includedir /etc/sudoers.d"
+            insertafter: EOF
+            state: present
+
+    - name: Dependencies
+      ansible.builtin.include_tasks: "{{ item }}"
+      with_first_found:
+        - paths:
+            - "."
+        - files:
+            - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+            - "{{ ansible_distribution }}.yml"
+            - "{{ ansible_os_family }}.yml"
+...
