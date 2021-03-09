@@ -37,7 +37,8 @@ provisioner:
       ansible_user: ansible
   # Ansible options:
   config_options:
-    stdout_callback: yaml
+    defaults:
+      stdout_callback: yaml
 verifier:
   name: ansible
 ...
