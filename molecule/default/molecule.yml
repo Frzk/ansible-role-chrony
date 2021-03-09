@@ -12,7 +12,7 @@ platforms:
       - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    pre_build_image: true
+    pre_build_image: false
 scenario:
   name: default
   test_sequence:
@@ -29,10 +29,13 @@ scenario:
     - destroy
 provisioner:
   name: ansible
+  options:
+    vvv: yes
   host_vars:
     # setting for the platform instance named 'instance'
     instance:
       ansible_user: ansible
+  # Ansible options:
   config_options:
     stdout_callback: yaml
 verifier:
