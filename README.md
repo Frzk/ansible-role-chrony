@@ -1,6 +1,7 @@
 # Ansible Role: `chrony`
 
 [![Build Status](https://travis-ci.org/Frzk/ansible-role-chrony.svg?branch=master)](https://travis-ci.org/Frzk/ansible-role-chrony)
+[![GitHub Super-Linter](https://github.com/Frzk/ansible-role-chrony/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)
 
 This Ansible role allows you to install `chrony` and manage its configuration.
 
@@ -14,9 +15,9 @@ For more information about `chrony`, please check [the official project page](ht
 | `chrony_service_name`       | Wether we should flush the current ruleset or not.                             | `chronyd`                              |
 | `chrony_timezone`           | Path to the configuration file.                                                | `Etc/UTC`                              |
 | `chrony_ntp_pools`          | A list of NTP pools to use, with their options.                                | `[ 'pool.ntp.org iburst maxpoll 10' ]` |
-| `chrony_ntp_servers`        | A list of NTP servers to use, with their options.                              | `[]`                                   |
-| `chrony_ntp_peers`          | A list of NTP peers to use, with their options.                                | `[]`                                   |
-| `chrony_config_file`        | Path to chrony configuration file.                                             | `/etc/chrony.conf`                     |
+| `chrony_ntp_servers`        | A list of NTP servers to use, with their options.                              | `[]`                                   |
+| `chrony_ntp_peers`          | A list of NTP peers to use, with their options.                                | `[]`                                   |
+| `chrony_config_file`        | Path to chrony configuration file.                                             | `/etc/chrony.conf`                     |
 | `chrony_config_logdir`      | Path to chrony logs directory.                                                 | `/var/log/chrony`                      |
 | `chrony_config_driftfile`   | Path to chrony drift file.                                                     | `/var/lib/chrony/drift`                |
 | `chrony_makestep_threshold` | Limit (in sec) above which chrony will step the clock instead of slewing it.   | `1`                                    |
