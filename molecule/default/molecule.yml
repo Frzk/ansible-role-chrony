@@ -5,8 +5,8 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "${MOLECULE_DISTRIB:-centos7}:latest"
-    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    image: "${WRKFLW_DISTRIB:-centos7}:latest"
+    command: ${WRKFLW_DOCKER_COMMAND:-""}
     tmpfs:
       - /run
       - /tmp

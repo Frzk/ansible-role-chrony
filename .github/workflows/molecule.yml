@@ -50,5 +50,5 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           ANSIBLE_LOAD_CALLBACK_PLUGINS: '1'
-          MOLECULE_DISTRIB: ${{ matrix.docker_image }}
+          WRKFLW_DISTRIB: ${{ matrix.docker_image }}
 ...
