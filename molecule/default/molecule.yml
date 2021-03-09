@@ -5,7 +5,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "kblr/${MOLECULE_DISTRIB:-centos7}-ansible:latest"
+    image: "${MOLECULE_DISTRIB:-centos7}:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     tmpfs:
       - /run
