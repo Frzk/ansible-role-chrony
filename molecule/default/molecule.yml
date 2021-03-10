@@ -29,8 +29,6 @@ scenario:
     - destroy
 provisioner:
   name: ansible
-  options:
-    vvv: yes
   host_vars:
     # setting for the platform instance named 'instance'
     instance:
