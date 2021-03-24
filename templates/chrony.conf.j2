@@ -1,5 +1,5 @@
 #jinja2: lstrip_blocks: True
-{{ ansible_managed | comment }}
+# {{ ansible_managed }}
 # Configuration file for chrony service.
 
 {% if chrony_ntp_servers|length > 0 %}

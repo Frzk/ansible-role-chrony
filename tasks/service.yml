@@ -1,0 +1,9 @@
+---
+
+- name: start and enable {{ chrony_service_name }}
+  service:
+    name: "{{ chrony_service_name }}"
+    state: started
+    enabled: true
+
+...

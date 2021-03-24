@@ -1,15 +1,21 @@
 ---
-chrony_service_name: chronyd
+
+# chrony_service_name: chronyd
 chrony_timezone: "Etc/UTC"
+
 chrony_ntp_pools:
   - pool.ntp.org iburst maxpoll 10
+
 chrony_ntp_servers: []
 chrony_ntp_peers: []
-chrony_config_file: /etc/chrony.conf
+
+# chrony_config_file: /etc/chrony.conf
 chrony_config_logdir: /var/log/chrony
-chrony_config_driftfile: /var/lib/chrony/drift
+# chrony_config_driftfile: /var/lib/chrony/drift
+
 chrony_makestep_threshold: 1
 chrony_makestep_limit: 10
+
 chrony_allow: []
 chrony_deny: []
 ...

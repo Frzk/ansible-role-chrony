@@ -1,42 +1,49 @@
 ---
 dependency:
   name: galaxy
+
 driver:
   name: docker
+
+lint: |
+  set -e
+  yamllint .
+  ansible-lint .
+  flake8 .
+
 platforms:
   - name: instance
-    image: "${WRKFLW_DISTRIB:-centos7}:latest"
-    command: ${WRKFLW_DOCKER_COMMAND:-""}
-    tmpfs:
-      - /run
-      - /tmp
+    image: "diodonfrost/ansible-${DISTRIBUTION:-debian:10}"
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    docker_host: "${DOCKER_HOST:-unix://run/docker.sock}"
+    privileged: true
+    pre_build_image: true
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    pre_build_image: false
+
+provisioner:
+  name: ansible
+  ansible_args:
+    - --diff
+    # - -vv
+  config_options:
+    defaults:
+      deprecation_warnings: True
+      stdout_callback: yaml
+
 scenario:
-  name: default
   test_sequence:
-    # - lint
+    - lint
     - destroy
     - dependency
     - syntax
     - create
     - prepare
     - converge
-    - idempotence
-    # - side_effect
     - verify
     - destroy
-provisioner:
-  name: ansible
-  host_vars:
-    # setting for the platform instance named 'instance'
-    instance:
-      ansible_user: ansible
-  # Ansible options:
-  config_options:
-    defaults:
-      stdout_callback: yaml
+
 verifier:
-  name: ansible
+  name: testinfra
+
 ...

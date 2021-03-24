@@ -1,0 +1,21 @@
+---
+
+- name: install chrony
+  package:
+    name: chrony
+    state: present
+
+- name: disable conflicting services
+  service:
+    name: "{{ item }}"
+    state: stopped
+    enabled: false
+  register: disable_service_result
+  failed_when:
+    - disable_service_result is failed
+    - ('Could not find the requested service' not in disable_service_result.msg)
+  with_items:
+    - ntpd
+    - systemd-timesyncd
+
+...

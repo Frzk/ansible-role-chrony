@@ -1,0 +1,32 @@
+---
+
+_chrony_config_driftfile:
+  default: /var/lib/chrony/chrony.drift
+  redhat: /var/lib/chrony/drift
+  archlinux: /var/lib/chrony/drift
+
+chrony_config_driftfile: "{{
+          _chrony_config_driftfile[ansible_os_family | lower] |
+  default(_chrony_config_driftfile[ansible_os_family | lower | replace(' ', '') ] |
+  default(_chrony_config_driftfile['default'])) }}"
+
+_chrony_service_name:
+  default: chronyd
+  archlinux: chronyd
+
+chrony_service_name: "{{
+          _chrony_service_name[ansible_os_family | lower] |
+  default(_chrony_service_name[ansible_os_family | lower | replace(' ', '') ] |
+  default(_chrony_service_name['default'])) }}"
+
+_chrony_config_file:
+  default: /etc/chrony/chrony.conf
+  redhat: /etc/chrony.conf
+  archlinux: /etc/chrony.conf
+
+chrony_config_file: "{{
+          _chrony_config_file[ansible_os_family | lower] |
+  default(_chrony_config_file[ansible_os_family | lower | replace(' ', '') ] |
+  default(_chrony_config_file['default'])) }}"
+
+...
