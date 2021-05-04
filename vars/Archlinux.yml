@@ -1,3 +1,0 @@
----
-chrony_config_driftfile: /var/lib/chrony/drift
-...
