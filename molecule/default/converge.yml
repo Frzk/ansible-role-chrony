@@ -1,6 +1,11 @@
 ---
-- name: Converge
+- name: converge
   hosts: all
+  any_errors_fatal: false
+
+  environment:
+    NETRC: ''
+
   roles:
-    - role: frzk.chrony
+    - role: ansible-role-chrony
 ...

@@ -1,64 +1,11 @@
 ---
-- name: Include OS specific configuration
-  include_vars: "{{ item }}"
-  with_first_found:
-    - paths:
-        - "vars"
-    - files:
-        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-        - "{{ ansible_distribution }}.yml"
-        - "{{ ansible_os_family }}.yml"
-      skip: true
 
-- name: Set up timezone
-  timezone:
-    name: "{{ chrony_timezone }}"
+- include_tasks: prepare.yml
 
+- include_tasks: install.yml
 
-# Setup config before installing chrony to keep idempotency.
-# Installing the service will also start it, but we want chrony to run with OUR config.
-# If we install chrony before installing the config file, chrony would have to be restarted and we'd lose idempotency.
-- name: Create configuration directory
-  file:
-    path: "{{ chrony_config_file | dirname }}"
-    state: directory
-    owner: root
-    group: root
-    mode: 0755
+- include_tasks: configure.yml
 
-- name: Set up
-  template:
-    src: templates/chrony.conf.j2
-    dest: "{{ chrony_config_file }}"
-    owner: root
-    group: root
-    mode: 0644
-  notify: Restart chrony
+- include_tasks: service.yml
 
-- name: Install
-  package:
-    name: "chrony"
-    state: present
-
-- name: Disable conflicting services
-  service:
-    name: "{{ item }}"
-    state: stopped
-    enabled: false
-  register: disable_service_result
-  failed_when: (disable_service_result is failed)
-               and ('Could not find the requested service' not in disable_service_result.msg)
-  with_items:
-    - ntpd
-    - systemd-timesyncd
-
-- name: Start service
-  service:
-    name: "{{ chrony_service_name }}"
-    state: started
-
-- name: Enable service
-  service:
-    name: "{{ chrony_service_name }}"
-    enabled: true
 ...

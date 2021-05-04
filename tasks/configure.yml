@@ -1,0 +1,65 @@
+---
+
+# For Linux it can use timedatectl or
+# edit:
+#  - /etc/sysconfig/clock or
+#  - /etc/timezone and
+#  - hwclock
+
+# /etc/timezone is a text-based representation of what timezone you are in.
+# This could be expressed as an offset from GMT/UTC, but more often it's the path under
+# /usr/share/zoneinfo that points to the appropriate timezone data file
+# (for example, if you're in most places in the eastern US, this will be America/New_York or US/Eastern).
+# The main purpose of this is to make sure that /etc/localtime gets updated correctly
+# when the data files in /usr/share/zoneinfo are updated (although some systmes make
+# /etc/localtime a symbolic link pointing to the correct file there), and to provide
+# a quick user-friendly name for the timezone (US/Eastern is a lot more user friendly
+# than EST or EDT). Only some systems actually use this file.
+#
+# /etc/localtime is a binary representation of the exact rules for calculating the time
+# relative to UNIX time (the internal representation used by the kernel, which is measured
+# as seconds since 1970-01-01 00:00:00 UTC). This includes things like the normal offset
+# from UTC, as well as the rules for when daylight-savings-time (if you're in an insane
+# municipality that observes it) starts and ends and what offset that applies, as well
+# as encoding the rules for leap day, and annotating how may leap seconds have been observed.
+# This is what gets used by things like the date command (and it's equivalent functions
+# in various programming languages) to show you exactly what time it is locally.
+# All Linux systems with a conventional userspace use this file.
+
+- name: set localtime
+  file:
+    state: link
+    src: /usr/share/zoneinfo/{{ chrony_timezone }}
+    dest: /etc/localtime
+    force: true
+  when:
+    - chrony_timezone is defined
+
+# - name: Set up timezone
+#   timezone:
+#     name: "{{ chrony_timezone }}"
+
+# Setup config before installing chrony to keep idempotency.
+# Installing the service will also start it, but we want chrony to run with OUR config.
+# If we install chrony before installing the config file, chrony would have to be restarted and we'd lose idempotency.
+- name: create configuration directory
+  file:
+    path: "{{ chrony_config_file | dirname }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+  when:
+    - ansible_os_family | lower == 'debian'
+
+- name: create configuration file
+  template:
+    src: templates/chrony.conf.j2
+    dest: "{{ chrony_config_file }}"
+    owner: root
+    group: root
+    mode: 0644
+    backup: true
+  notify: restart chrony
+
+...

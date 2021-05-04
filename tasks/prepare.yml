@@ -1,0 +1,7 @@
+---
+
+- name: update package cache
+  package:
+    update_cache: true
+
+...
