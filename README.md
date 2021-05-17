@@ -12,8 +12,8 @@ For more information about `chrony`, please check [the official project page](ht
 
 | Variable name               | Description                                                                    | Default value                          |
 | --------------------------- | ------------------------------------------------------------------------------ | -------------------------------------- |
-| `chrony_service_name`       | Wether we should flush the current ruleset or not.                             | `chronyd`                              |
-| `chrony_timezone`           | Path to the configuration file.                                                | `Etc/UTC`                              |
+| `chrony_service_name`       | Service name.                                                                  | `chronyd`                              |
+| `chrony_timezone`           | Default timezone.                                                              | `Etc/UTC`                              |
 | `chrony_ntp_pools`          | A list of NTP pools to use, with their options.                                | `[ 'pool.ntp.org iburst maxpoll 10' ]` |
 | `chrony_ntp_servers`        | A list of NTP servers to use, with their options.                              | `[]`                                   |
 | `chrony_ntp_peers`          | A list of NTP peers to use, with their options.                                | `[]`                                   |
