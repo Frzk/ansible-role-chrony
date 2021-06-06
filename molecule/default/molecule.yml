@@ -13,6 +13,7 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     pre_build_image: false
+    privileged: true
 scenario:
   name: default
   test_sequence:
