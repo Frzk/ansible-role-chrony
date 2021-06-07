@@ -12,6 +12,7 @@ platforms:
       - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket:ro
     capabilities:
       - SYS_ADMIN
       - SYS_TIME
