@@ -18,7 +18,7 @@
             path: "/etc/sudoers.d/"
             owner: root
             group: root
-            mode: 0755
+            mode: 0750
             state: directory
 
         - name: Allow user ansible to sudo (1)
@@ -29,23 +29,23 @@
             create: yes
             owner: root
             group: root
-            mode: 0440
+            mode: 0644
             state: present
 
         - name: Allow user ansible to sudo (2)
           ansible.builtin.lineinfile:
             path: /etc/sudoers
-            line: "#includedir /etc/sudoers.d"
+            line: "@includedir /etc/sudoers.d"
             insertafter: EOF
             state: present
 
-    - name: Dependencies
-      ansible.builtin.include_tasks: "{{ item }}"
-      with_first_found:
-        - paths:
-            - "."
-        - files:
-            - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
-            - "{{ ansible_distribution }}.yml"
-            - "{{ ansible_os_family }}.yml"
+#    - name: Dependencies
+#      ansible.builtin.include_tasks: "{{ item }}"
+#      with_first_found:
+#        - paths:
+#            - "."
+#        - files:
+#            - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+#            - "{{ ansible_distribution }}.yml"
+#            - "{{ ansible_os_family }}.yml"
 ...
