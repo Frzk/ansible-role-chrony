@@ -12,7 +12,9 @@ platforms:
       - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    pre_build_image: false
+    capabilities:
+      - SYS_ADMIN
+    pre_build_image: true
 scenario:
   name: default
   test_sequence:
