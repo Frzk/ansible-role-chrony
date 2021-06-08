@@ -1,7 +1,7 @@
 # Ansible Role: `chrony`
 
-[![Build Status](https://travis-ci.org/Frzk/ansible-role-chrony.svg?branch=master)](https://travis-ci.org/Frzk/ansible-role-chrony)
 [![GitHub Super-Linter](https://github.com/Frzk/ansible-role-chrony/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![Molecule](https://github.com/Frzk/ansible-role-chrony/actions/workflows/molecule.yml/badge.svg)](https://github.com/Frzk/ansible-role-chrony/actions/workflows/molecule.yml)
 
 This Ansible role allows you to install `chrony` and manage its configuration.
 
