@@ -6,22 +6,21 @@ driver:
 platforms:
   - name: instance
     image: "kblr/${WRKFLW_DISTRIB:-centos7}-ansible:latest"
-    command: ${WRKFLW_DOCKER_COMMAND:-"/sbin/init"}
+    command: ${WRKFLW_DOCKER_COMMAND:-""}
     tmpfs:
       - /run
       - /tmp
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-#      - /run/dbus/system_bus_socket:/run/dbus/system_bus_socket:ro
     capabilities:
       - SYS_ADMIN
       - SYS_TIME
-    privileged: false
+    privileged: true
     pre_build_image: true
 scenario:
   name: default
   test_sequence:
-    # - lint
+    # - lint: linting is done in GitHub Workflow.
     - dependency
     - cleanup
     - destroy
@@ -37,7 +36,7 @@ scenario:
 provisioner:
   name: ansible
   host_vars:
-    # setting for the platform instance named 'instance'
+    # settings for the platform instance named 'instance'
     instance:
       ansible_user: ansible
   # Ansible options:
