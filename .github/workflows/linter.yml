@@ -20,7 +20,7 @@ jobs:
           path: 'frzk.chrony'
 
       - name: 🧐 Lint
-        uses: github/super-linter@v3
+        uses: docker://ghcr.io/github/super-linter:slim-v4
         env:
           VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: master
