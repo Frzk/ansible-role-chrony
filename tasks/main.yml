@@ -1,6 +1,6 @@
 ---
 - name: Include OS specific configuration
-  ansible.builtin.include_vars: "{{ lookup('first_found', findme }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', findme) }}"
   vars:
     findme:
       paths:
