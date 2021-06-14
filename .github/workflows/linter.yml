@@ -8,6 +8,10 @@ on:
     branches:
       - master
 
+defaults:
+  run:
+    working-directory: frzk.chrony
+
 jobs:
   lint:
     name: Linting
