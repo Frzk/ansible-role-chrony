@@ -38,7 +38,6 @@ Here is a small example of what your file should look like.
 ```yaml
 ---
 chrony_service_name: chronyd
-chrony_timezone: Europe/Paris
 chrony_ntp_pools: []
 chrony_ntp_servers:
   - 0.rhel.pool.ntp.org iburst maxpoll 10
