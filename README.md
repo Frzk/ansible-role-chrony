@@ -2,6 +2,7 @@
 
 [![GitHub Super-Linter](https://github.com/Frzk/ansible-role-chrony/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
 [![Molecule](https://github.com/Frzk/ansible-role-chrony/actions/workflows/molecule.yml/badge.svg)](https://github.com/Frzk/ansible-role-chrony/actions/workflows/molecule.yml)
+[![Ansible Role](https://img.shields.io/ansible/role/d/23375?color=2997FF&label=Ansible%20Galaxy%20downloads&logo=ansible)](https://galaxy.ansible.com/Frzk/chrony))
 
 This Ansible role allows you to install `chrony` and manage its configuration.
 
