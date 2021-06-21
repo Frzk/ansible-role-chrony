@@ -22,10 +22,11 @@ jobs:
       matrix:
         docker_image:
           - archlinux
-          # - debian10
-          # - debian9
-          # - ubuntu1804
-          # - ubuntu1604
+          # - debian-11
+          # - debian-10
+          # - debian-9
+          # - ubuntu-20.04
+          # - ubuntu-18.04
     steps:
       - name: 🛎 Checkout
         uses: actions/checkout@v2

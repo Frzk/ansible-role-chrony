@@ -1,8 +1,16 @@
 ---
 - name: Prepare
   hosts: all
-  become: yes
   tasks:
+    - name: Packages
+      block:
+        - name: Install packages
+          ansible.builtin.package:
+            name: "{{ item }}"
+            state: present
+          loop:
+            - "sudo"
+
     - name: Ansible User
       block:
         - name: Create ansible user
@@ -34,8 +42,12 @@
 
         - name: Allow user ansible to sudo (2)
           ansible.builtin.lineinfile:
-            path: /etc/sudoers
+            path: "/etc/sudoers"
             line: "@includedir /etc/sudoers.d"
             insertafter: EOF
+            create: yes
+            owner: root
+            group: root
+            mode: 0640
             state: present
 ...

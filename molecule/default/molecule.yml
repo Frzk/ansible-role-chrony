@@ -5,7 +5,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "kblr/${WRKFLW_DISTRIB:-centos7}-ansible:latest"
+    image: "${WRKFLW_DISTRIB}"
     command: ${WRKFLW_DOCKER_COMMAND:-""}
     tmpfs:
       - /run
@@ -16,7 +16,6 @@ platforms:
 #      - SYS_ADMIN
 #      - SYS_TIME
     privileged: true
-    pre_build_image: true
 scenario:
   name: default
   test_sequence:
