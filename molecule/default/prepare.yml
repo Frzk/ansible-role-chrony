@@ -11,6 +11,14 @@
           loop:
             - "sudo"
 
+    - name: wheel Group
+      block:
+        - name: Create `wheel` group
+          ansible.builtin.group:
+            name: "wheel"
+            system: yes
+            state: present
+
     - name: Ansible User
       block:
         - name: Create ansible user
@@ -37,7 +45,7 @@
             create: yes
             owner: root
             group: root
-            mode: 0644
+            mode: 0440
             state: present
 
         - name: Allow user ansible to sudo (2)
