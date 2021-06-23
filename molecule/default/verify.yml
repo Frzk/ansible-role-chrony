@@ -53,9 +53,9 @@
     - name: Test service state
       ansible.builtin.assert:
         that:
-          - "'{{ item }}' in ansible_facts.services"
-          - "ansible_facts.services['{{ item }}'].state == 'running'"
-          - "ansible_facts.services['{{ item }}'].status == 'enabled'"
+          - "'{{ item }}.service' in ansible_facts.services"
+          - "ansible_facts.services['{{ item }}.service'].state == 'running'"
+          - "ansible_facts.services['{{ item }}.service'].status == 'enabled'"
       loop:
         - "{{ chrony_service_name }}"
       tags:
