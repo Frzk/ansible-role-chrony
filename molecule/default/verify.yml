@@ -1,0 +1,63 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Include OS specific configuration
+      ansible.builtin.include_vars: "{{ lookup('first_found', findme) }}"
+      vars:
+        findme:
+          paths:
+            - "../../vars"
+          files:
+            - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+            - "{{ ansible_distribution }}.yml"
+            - "{{ ansible_os_family }}.yml"
+          skip: yes
+
+    - name: Retrieve configuration directory state
+      ansible.builtin.stat:
+        path: "{{ chrony_config_file | dirname }}"
+      register: chrony_config_dir
+      tags:
+        - "tdd"
+
+    - name: Test configuration directory state
+      ansible.builtin.assert:
+        that:
+          - "chrony_config_dir.stat.exists"
+          - "chrony_config_dir.stat.isdir"
+          - "chrony_config_dir.stat.mode == '0755'"
+          - "chrony_config_dir.stat.pw_name == 'root'"
+          - "chrony_config_dir.stat.gr_name == 'root'"
+      tags:
+        - "tdd"
+
+    - name: Populate packages facts
+      ansible.builtin.package_facts:
+      tags:
+        - "tdd"
+
+    - name: Test package state
+      ansible.builtin.assert:
+        that: "'{{ item }}' in ansible_facts.packages"
+      loop:
+        - "chrony"
+      tags:
+        - "tdd"
+
+    - name: Populate services facts
+      ansible.builtin.service_facts:
+      tags:
+        - "tdd"
+
+    - name: Test service state
+      ansible.builtin.assert:
+        that:
+          - "'{{ item }}' in ansible_facts.services"
+          - "ansible_facts.services['{{ item }}'].state == 'running'"
+          - "ansible_facts.services['{{ item }}'].status == 'enabled'"
+      loop:
+        - "{{ chrony_service_name }}"
+      tags:
+        - "tdd"
+...
