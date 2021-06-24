@@ -17,9 +17,6 @@
             - "{{ ansible_os_family }}.yml"
           skip: yes
 
-    - ansible.builtin.debug:
-        var: chrony_config_logdir
-
     - name: Retrieve configuration directory state
       ansible.builtin.stat:
         path: "{{ chrony_config_file | dirname }}"
