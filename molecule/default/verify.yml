@@ -15,7 +15,7 @@
           skip: yes
 
     - ansible.builtin.debug:
-        var: chrony_config_file | dirname
+        var: chrony_config_file
 
     - name: Retrieve configuration directory state
       ansible.builtin.stat:
