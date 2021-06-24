@@ -6,7 +6,8 @@ on:
   pull_request:
   push:
     branches:
-      - master
+      - main
+      - testing
 
 jobs:
   lint:
@@ -21,7 +22,7 @@ jobs:
       - name: 🧐 Lint
         uses: docker://ghcr.io/github/super-linter:slim-v4
         env:
-          DEFAULT_BRANCH: master
+          DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VALIDATE_ALL_CODEBASE: true
           VALIDATE_ANSIBLE: true
