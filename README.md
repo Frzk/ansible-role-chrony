@@ -41,7 +41,7 @@ None
 
 ## Example
 
-Here is a small example of what your file should look like.
+Here is a small **example** playbook.
 
 **IMPORTANT**: DO NOT use this example as it is.
 
@@ -81,7 +81,7 @@ Testing is done by leveraging Molecule and Ansible (see [verify.yml](molecule/de
 Tests successfully pass under the following distributions:
 
 - Arch Linux
-- ~~Debian 11~~ see #10
+- ~~Debian 11~~ see [issue #10](https://github.com/Frzk/ansible-role-chrony/issues/10)
 - Debian 10
 - Debian 9
 - Ubuntu 20.04
