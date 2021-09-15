@@ -8,6 +8,15 @@ This Ansible role allows you to install `chrony` and manage its configuration.
 
 For more information about `chrony`, please check [the official project page](https://chrony.tuxfamily.org/).
 
+## Requirements
+
+None
+
+
+## Dependencies
+
+None
+
 
 ## Role variables
 
@@ -27,7 +36,7 @@ For more information about `chrony`, please check [the official project page](ht
 
 :green_book: Documentation:
 
-- [Chrony configuration documentation](https://chrony.tuxfamily.org/doc/3.2/chrony.conf.html)
+- [Chrony configuration documentation](https://chrony.tuxfamily.org/doc/4.1/chrony.conf.html)
 
 
 ## Example
@@ -38,28 +47,45 @@ Here is a small example of what your file should look like.
 
 ```yaml
 ---
-chrony_service_name: chronyd
-chrony_ntp_pools: []
-chrony_ntp_servers:
-  - 0.rhel.pool.ntp.org iburst maxpoll 10
-  - 1.rhel.pool.ntp.org iburst maxpoll 10
-  - 2.rhel.pool.ntp.org iburst maxpoll 10
-  - 3.rhel.pool.ntp.org iburst maxpoll 10
-chrony_ntp_peers:
-  - ntp00.example.com maxpoll 10
-  - ntp01.example.com maxpoll 10
-  - ntp02.example.com maxpoll 10
-chrony_config_file: /etc/chrony.conf
-chrony_config_driftfile: /var/lib/chrony/drift
-chrony_makestep_threshold: 5
-chrony_makestep_limit: 3
-chrony_allow:
-  - 192.0.2.0/24
-  - 192.0.2.200
-chrony_deny:
-  - 192.0.2.0/25
+- hosts: all
+  become: true
+  roles:
+    - role: frzk.chrony
+      chrony_service_name: chronyd
+      chrony_ntp_pools: []
+      chrony_ntp_servers:
+        - 0.rhel.pool.ntp.org iburst maxpoll 10
+        - 1.rhel.pool.ntp.org iburst maxpoll 10
+        - 2.rhel.pool.ntp.org iburst maxpoll 10
+        - 3.rhel.pool.ntp.org iburst maxpoll 10
+      chrony_ntp_peers:
+        - ntp00.example.com maxpoll 10
+        - ntp01.example.com maxpoll 10
+        - ntp02.example.com maxpoll 10
+      chrony_config_file: /etc/chrony.conf
+      chrony_config_driftfile: /var/lib/chrony/drift
+      chrony_makestep_threshold: 5
+      chrony_makestep_limit: 3
+      chrony_allow:
+        - 192.0.2.0/24
+        - 192.0.2.200
+      chrony_deny:
+        - 192.0.2.0/25
 ...
 ```
+
+## Testing
+
+Testing is done by leveraging Molecule and Ansible (see [verify.yml](molecule/default/verify.yml)), through GitHub Actions and Docker containers.
+
+Tests successfully pass under the following distributions:
+
+- Arch Linux
+- ~~Debian 11~~ see #10
+- Debian 10
+- Debian 9
+- Ubuntu 20.04
+- Ubuntu 18.04
 
 
 ## Contributing
