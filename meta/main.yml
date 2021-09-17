@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   role_name: chrony
+  namespace: frzk
   author: François KUBLER
   description: Install, configure and enable chrony.
   company: KBLR
@@ -11,16 +12,14 @@ galaxy_info:
     - name: Archlinux
       versions:
         - all
-    - name: EL
-      versions:
-        - 7
     - name: Debian
       versions:
         - buster
-        - sid
+        - stretch
     - name: Ubuntu
       versions:
-        - trusty
+        - focal
+        - bionic
   galaxy_tags:
     - system
     - ntp
