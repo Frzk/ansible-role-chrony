@@ -22,7 +22,7 @@ jobs:
   molecule:
     name: Testing with Molecule
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'schedule' || github.event.workflow_run.conclusion == 'success' }}
     strategy:
       matrix:
         docker_image:
