@@ -31,6 +31,21 @@
     mode: 0644
   notify: Restart chrony
 
+- name: Create systemd drop-in
+  ansible.builtin.file:
+    path: "/etc/systemd/system/{{ chrony_service_name }}.service.d"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Set up systemd override
+  ansible.builtin.template:
+    src: "templates/systemd_override.conf.j2"
+    dest: "/etc/systemd/system/{{ chrony_service_name }}.service.d/override.conf"
+    owner: root
+    group: root
+    mode: 0755
+
 - name: Install
   ansible.builtin.package:
     name: "chrony"

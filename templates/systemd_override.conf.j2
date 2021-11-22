@@ -1,0 +1,36 @@
+[Service]
+Type=simple
+
+# DynamicUser=true
+# User=chrony
+# Group=chrony
+
+RuntimeDirectory=/run/chrony
+StateDirectory={{ chrony_config_driftfile | dirname }}
+ConfigurationDirectory={{ chrony_config_file | dirname }}
+
+PIDFile=/run/chrony/chronyd.pid
+
+KeyringMode=private
+LockPersonality=true
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+PrivateMounts=true
+PrivateTmp=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectHostname=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+ReadWritePaths = /run/chrony {{ chrony_config_driftfile | dirname }}
+RemoveIPC=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+SystemCallFilter=@system-service @clock
+SystemCallArchitectures=native
+
+DeviceAllow=char-rtc
+DevicePolicy=closed
