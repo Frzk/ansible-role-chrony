@@ -1,11 +1,15 @@
 [Service]
 Type=simple
 
+ExecStart=
+ExecStart=/usr/bin/chronyd -f {{ chrony_config_file }} -U
+
 DynamicUser=true
 User=chrony
 Group=chrony
 
-RuntimeDirectory=/run/chrony
+RuntimeDirectory=chrony
+RuntimeDirectoryMode=0770
 StateDirectory={{ chrony_config_driftfile | dirname }}
 ConfigurationDirectory={{ chrony_config_file | dirname }}
 
@@ -23,7 +27,7 @@ ProtectHostname=true
 ProtectKernelModules=true
 ProtectKernelTunables=true
 ProtectSystem=strict
-ReadWritePaths = /run/chrony {{ chrony_config_driftfile | dirname }}
+ReadWritePaths={{ chrony_config_driftfile | dirname }} /run/chrony
 RemoveIPC=true
 RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
 RestrictNamespaces=true
@@ -34,3 +38,5 @@ SystemCallArchitectures=native
 
 DeviceAllow=char-rtc
 DevicePolicy=closed
+
+AmbientCapabilities=CAP_SYS_TIME CAP_NET_BIND_SERVICE CAP_NET_RAW
