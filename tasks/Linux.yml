@@ -22,9 +22,10 @@
 - name: Create systemd drop-in
   ansible.builtin.file:
     path: "/etc/systemd/system/{{ chrony_service_name }}.service.d"
+    state: directory
     owner: root
     group: root
-    mode: 0644
+    mode: 0755
 
 - name: Set up systemd override
   ansible.builtin.template:
