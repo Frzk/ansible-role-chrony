@@ -2,7 +2,7 @@
 Type=simple
 
 ExecStart=
-ExecStart=/usr/bin/chronyd -f {{ chrony_config_file }} -U
+ExecStart={{ chrony_service_executable }} -f {{ chrony_config_file }} -U
 
 DynamicUser=true
 User=chrony

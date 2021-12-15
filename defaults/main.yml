@@ -1,5 +1,6 @@
 ---
 chrony_service_name: chronyd
+chrony_service_executable: /usr/bin/chronyd
 chrony_ntp_pools:
   - pool.ntp.org iburst maxpoll 10
 chrony_ntp_servers: []

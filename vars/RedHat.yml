@@ -1,5 +1,6 @@
 ---
 chrony_service_name: chronyd
+chrony_service_executable: /usr/sbin/chronyd
 chrony_config_file: /etc/chrony.conf
 chrony_config_driftfile: /var/lib/chrony/drift
 ...
