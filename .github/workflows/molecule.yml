@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'schedule' || github.event.workflow_run.conclusion == 'success' }}
     strategy:
+      fail-fast: false
       matrix:
         docker_image:
           - "archlinux"
@@ -35,6 +36,7 @@ jobs:
     steps:
       - name: 🛎 Checkout
         uses: actions/checkout@v2
+        ref: ${{ env.GITHUB_REF }}
         with:
           fetch-depth: 0
           path: 'frzk.chrony'
