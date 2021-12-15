@@ -1,0 +1,5 @@
+---
+- name: Failover message
+  ansible.builtin.debug:
+    msg: "Your system ({{ ansible_system }}) is not supported."
+...
