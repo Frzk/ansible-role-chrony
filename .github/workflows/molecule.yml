@@ -36,9 +36,9 @@ jobs:
     steps:
       - name: 🛎 Checkout
         uses: actions/checkout@v2
-        ref: ${{ env.GITHUB_REF }}
         with:
           fetch-depth: 0
+          ref: ${{ env.GITHUB_REF }}
           path: 'frzk.chrony'
 
       - name: 🐍 Set up Python
