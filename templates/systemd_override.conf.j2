@@ -1,9 +1,9 @@
 [Service]
 Type=simple
 
-# DynamicUser=true
-# User=chrony
-# Group=chrony
+DynamicUser=true
+User=chrony
+Group=chrony
 
 RuntimeDirectory=/run/chrony
 StateDirectory={{ chrony_config_driftfile | dirname }}
