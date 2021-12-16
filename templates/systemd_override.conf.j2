@@ -10,8 +10,8 @@ Group=chrony
 
 RuntimeDirectory=chrony
 RuntimeDirectoryMode=0770
-StateDirectory={{ chrony_config_driftfile | dirname }}
-ConfigurationDirectory={{ chrony_config_file | dirname }}
+StateDirectory=chrony
+ConfigurationDirectory=chrony
 
 PIDFile=/run/chrony/chronyd.pid
 
