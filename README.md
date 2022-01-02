@@ -6,17 +6,17 @@
 
 This Ansible role allows you to install `chrony` and manage its configuration.
 
+An hardened systemd unit file is setup when deploying under Debian >= 11 and Arch Linux.
+
 For more information about `chrony`, please check [the official project page](https://chrony.tuxfamily.org/).
 
 ## Requirements
 
 None
 
-
 ## Dependencies
 
 None
-
 
 ## Role variables
 
@@ -36,8 +36,7 @@ None
 
 :green_book: Documentation:
 
-- [Chrony configuration documentation](https://chrony.tuxfamily.org/doc/4.1/chrony.conf.html)
-
+- [Chrony configuration documentation](https://chrony.tuxfamily.org/doc/4.2/chrony.conf.html)
 
 ## Example
 
@@ -73,7 +72,6 @@ Here is a small **example** playbook.
         - 192.0.2.0/25
 ...
 ```
-
 ## Testing
 
 Testing is done by leveraging Molecule and Ansible (see [verify.yml](molecule/default/verify.yml)), through GitHub Actions and Docker containers.
@@ -81,12 +79,11 @@ Testing is done by leveraging Molecule and Ansible (see [verify.yml](molecule/de
 Tests successfully pass under the following distributions:
 
 - Arch Linux
-- ~~Debian 11~~ see [issue #10](https://github.com/Frzk/ansible-role-chrony/issues/10)
+- Debian 11
 - Debian 10
 - Debian 9
 - Ubuntu 20.04
 - Ubuntu 18.04
-
 
 ## Contributing
 
