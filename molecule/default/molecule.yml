@@ -16,6 +16,7 @@ platforms:
 #      - SYS_ADMIN
 #      - SYS_TIME
     privileged: true
+    pre_build_image: false
 scenario:
   name: default
   test_sequence:
