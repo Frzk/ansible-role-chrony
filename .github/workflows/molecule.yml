@@ -50,7 +50,8 @@ jobs:
         run: |
           pip3 install --upgrade pip
           pip3 install --upgrade wheel
-          pip3 install ansible molecule[docker] docker
+          pip3 install ansible
+          pip3 install git+https://github.com/ansible-community/molecule-docker.git
 
       - name: 🧪 Run molecule
         run: |
