@@ -3,4 +3,5 @@
   hosts: all
   roles:
     - role: frzk.chrony
+  become: yes
 ...
