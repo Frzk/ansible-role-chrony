@@ -35,6 +35,7 @@ scenario:
     - destroy
 provisioner:
   name: ansible
+  log: true
   host_vars:
     # settings for the platform instance named 'instance'
     instance:
