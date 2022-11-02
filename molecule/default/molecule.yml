@@ -6,7 +6,7 @@ driver:
 platforms:
   - name: instance
     image: "${WRKFLW_DISTRIB}"
-    command: ${WRKFLW_DOCKER_COMMAND:-""}
+    command: ${WRKFLW_DOCKER_COMMAND:-"/sbin/init"}
     tmpfs:
       - /run
       - /tmp
