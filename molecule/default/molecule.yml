@@ -5,7 +5,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "${WRKFLW_DISTRIB}"
+    image: ${WRKFLW_DISTRIB}
     command: ${WRKFLW_DOCKER_COMMAND:-"/sbin/init"}
     tmpfs:
       - /run
