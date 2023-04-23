@@ -51,7 +51,7 @@ jobs:
           pip3 install --upgrade pip
           pip3 install --upgrade wheel
           pip3 install ansible
-          pip3 install git+https://github.com/ansible-community/molecule-docker.git
+          pip3 install molecule molecule-plugins[docker]
 
       - name: 🧪 Run molecule
         run: |
