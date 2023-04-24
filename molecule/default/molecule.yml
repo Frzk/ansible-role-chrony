@@ -5,7 +5,7 @@ driver:
   name: docker
 platforms:
   - name: instance
-    image: "Frzk/docker-ansible-images/${WRKFLW_DISTRIB-archlinux}:latest"
+    image: "frzk/docker-ansible-images/${WRKFLW_DISTRIB-archlinux}:latest"
     command: ${WRKFLW_DOCKER_COMMAND:-"/sbin/init"}
     tmpfs:
       - /run
