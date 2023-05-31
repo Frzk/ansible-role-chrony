@@ -19,8 +19,6 @@ platforms:
       - NET_RAW
     privileged: false
     pre_build_image: false
-    env:
-      container: docker
 scenario:
   name: default
   test_sequence:
@@ -52,7 +50,6 @@ provisioner:
   config_options:
     defaults:
       stdout_callback: yaml
-      remote_tmp: "${WORKSPACE:-$HOME}/.ansible/tmp"
 verifier:
   name: ansible
 ...
