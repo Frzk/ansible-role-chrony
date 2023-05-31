@@ -50,11 +50,8 @@ jobs:
         run: |
           pip3 install --upgrade pip
           pip3 install --upgrade wheel
-          pip3 install ansible molecule[docker] docker
-
-      - name: 🪐 Install Galaxy dependencies
-        run: |
-          ansible-galaxy collection install community.docker
+          pip3 install ansible
+          pip3 install molecule-plugins[docker]
 
       - name: 🧪 Run molecule
         run: |
