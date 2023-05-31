@@ -37,6 +37,9 @@ scenario:
     - destroy
 provisioner:
   name: ansible
+  env:
+    ANSIBLE_LOCAL_TEMP: "${WORKSPACE:-$HOME}/.ansible/tmp"
+    ANSIBLE_REMOTE_TMP: /tmp
   log: true
   inventory:
     host_vars:
