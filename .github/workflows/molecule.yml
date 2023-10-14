@@ -35,14 +35,14 @@ jobs:
           - "ubuntu-18.04"
     steps:
       - name: 🛎 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
           ref: ${{ env.GITHUB_REF }}
           path: 'frzk.chrony'
 
       - name: 🐍 Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
