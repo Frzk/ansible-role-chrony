@@ -1,0 +1,55 @@
+---
+name: Molecule (podman)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - podman
+
+defaults:
+  run:
+    working-directory: frzk.chrony
+
+jobs:
+  molecule:
+    name: Testing with Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        docker_image:
+          - "archlinux"
+          - "debian-11"
+          - "debian-10"
+          - "debian-9"
+          - "ubuntu-20.04"
+          - "ubuntu-18.04"
+    steps:
+      - name: 🛎 Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          ref: ${{ env.GITHUB_REF }}
+          path: 'frzk.chrony'
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: 🔧 Install dependencies
+        run: |
+          pip3 install --upgrade pip
+          pip3 install --upgrade wheel
+          pip3 install ansible molecule-plugins[docker]
+
+      - name: 🧪 Run molecule
+        run: |
+          molecule --debug test
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
+          ANSIBLE_LOAD_CALLBACK_PLUGINS: '1'
+          WRKFLW_DISTRIB: ${{ matrix.docker_image }}
+...
