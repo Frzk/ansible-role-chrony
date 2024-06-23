@@ -7,9 +7,7 @@ platforms:
   - name: instance
     image: "${WRKFLW_DISTRIB}"
     command: "${WRKFLW_DOCKER_COMMAND:-/sbin/init}"
-    tmpfs:
-      - /run
-      - /tmp
+    systemd: always
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     capabilities:
