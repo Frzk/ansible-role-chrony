@@ -42,6 +42,7 @@ provisioner:
       # described on line 7 of this file:
       instance:
         ansible_connection: podman
+        ansible_become_flags: -H -S
         ansible_user: ansible
         ansible_python_interpreter: auto_silent
   # Ansible options:

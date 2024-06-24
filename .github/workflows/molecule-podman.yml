@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        docker_image:
+        image:
           - "archlinux"
           - "debian-11"
           - "debian-10"
@@ -42,7 +42,7 @@ jobs:
         run: |
           pip3 install --upgrade pip
           pip3 install --upgrade wheel
-          pip3 install ansible molecule-plugins[docker]
+          pip3 install ansible molecule-plugins[podman]
 
       - name: 🧪 Run molecule
         run: |
@@ -51,5 +51,5 @@ jobs:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
           ANSIBLE_LOAD_CALLBACK_PLUGINS: '1'
-          WRKFLW_DISTRIB: ${{ matrix.docker_image }}
+          WRKFLW_DISTRIB: ${{ matrix.image }}
 ...
