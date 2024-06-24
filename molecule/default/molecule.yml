@@ -39,6 +39,7 @@ provisioner:
   inventory:
     host_vars:
       # setting for the platform instance named 'instance'
+      # described on line 7 of this file:
       instance:
         ansible_connection: podman
         ansible_user: ansible
