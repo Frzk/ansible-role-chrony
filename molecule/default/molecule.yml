@@ -45,6 +45,8 @@ provisioner:
   config_options:
     defaults:
       stdout_callback: yaml
+  options:
+    vvv: true
 verifier:
   name: ansible
 ...
