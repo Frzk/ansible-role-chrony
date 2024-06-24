@@ -8,15 +8,11 @@ platforms:
     image: "${WRKFLW_DISTRIB}"
     command: "${WRKFLW_DOCKER_COMMAND:-/sbin/init}"
     systemd: always
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    capabilities:
-      - SYS_ADMIN
-      - SYS_TIME
-      - NET_BIND_SERVICE
-      - NET_RAW
-    privileged: false
+    privileged: true
     pre_build_image: false
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:rw
+    cgroupns_mode: host
 scenario:
   name: default
   test_sequence:
@@ -42,7 +38,6 @@ provisioner:
       # described on line 7 of this file:
       instance:
         ansible_connection: podman
-        ansible_become_flags: -H -S
         ansible_user: ansible
         ansible_python_interpreter: auto_silent
   # Ansible options:
