@@ -1,0 +1,19 @@
+---
+- name: Prepare for Molecule
+  hosts: all
+  become: true
+  tasks:
+    # Make chronyd run with the -x flag, so that it doesn't try to set the
+    # Kernel clock. This operation requires true root.
+    # And we want to run our tests in a rootless container.
+    - name: Create /etc/sysconfig
+      ansible.builtin.file:
+        path: /etc/sysconfig
+        state: directory
+        mode: 0644
+    - name: Create /etc/sysconfig/chronyd
+      ansible.builtin.lineinfile:
+        path: /etc/sysconfig/chronyd
+        line: "OPTIONS='-x'"
+        state: present
+        create: true
