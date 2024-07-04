@@ -38,6 +38,8 @@ provisioner:
         ansible_user: ansible
         ansible_python_interpreter: auto_silent
   # Ansible options:
+  env:
+    ANSIBLE_VERBOSITY: 3
   config_options:
     defaults:
       stdout_callback: yaml
