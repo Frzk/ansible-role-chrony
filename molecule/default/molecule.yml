@@ -8,11 +8,8 @@ platforms:
     image: "${WRKFLW_DISTRIB}"
     command: "${WRKFLW_DOCKER_COMMAND:-/sbin/init}"
     systemd: always
-    privileged: true
+    privileged: false
     pre_build_image: false
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:rw
-    cgroupns_mode: host
 scenario:
   name: default
   test_sequence:
