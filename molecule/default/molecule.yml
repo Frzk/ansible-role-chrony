@@ -8,7 +8,7 @@ platforms:
     image: "${WRKFLW_DISTRIB}"
     command: "${WRKFLW_DOCKER_COMMAND:-/sbin/init}"
     systemd: always
-    privileged: false
+    privileged: true
     pre_build_image: false
 scenario:
   name: default
