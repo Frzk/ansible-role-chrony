@@ -11,6 +11,7 @@ on:
     branches:
       - "main"
       - "testing"
+      - "podman"
     types:
       - completed
 

@@ -55,6 +55,9 @@
     - openntpd
     - systemd-timesyncd
 
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+
 - name: Start service
   ansible.builtin.service:
     name: "{{ chrony_service_name }}"
