@@ -82,6 +82,7 @@ Tests successfully pass under the following distributions:
 - Debian 11
 - Debian 10
 - Debian 9
+- Ubuntu 24.04
 - Ubuntu 20.04
 - Ubuntu 18.04
 
