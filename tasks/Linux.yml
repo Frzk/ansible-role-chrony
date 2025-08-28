@@ -33,7 +33,7 @@
     dest: "/etc/systemd/system/{{ chrony_service_name }}.service.d/override.conf"
     owner: root
     group: root
-    mode: 0755
+    mode: 0644
 
 - name: Install
   ansible.builtin.package:
